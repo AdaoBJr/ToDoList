@@ -37,9 +37,7 @@ function removeAddClassSelected (event){
     // }
     //     if (event.target.tagName == 'li'){
     //         event.target.classList.add('selected')
-    //     }
-
-    
+    //     }   
  }
  function mouseOver (event){  // Adiciona a propriedade mouseOver (ponteiro indicador do mouse) ao passar o mouse sobre a tarefa
     let itemClass = document.querySelector('.selected');
@@ -48,17 +46,23 @@ function removeAddClassSelected (event){
     } else {
         event.target.style.cursor = 'pointer';
     }
- }
- 
+ } 
 function taskSelected () {
     let taskList = document.querySelector('#lista-tarefas');
     taskList.addEventListener('click', removeAddClassSelected);
     taskList.addEventListener('mouseover', mouseOver);
 }
 
-
-
+// Adiciona uma linha riscando o(s) item(s) já finalizado
+function taskCompleted (){
+    let taskList = document.querySelector('#lista-tarefas');
+    taskList.addEventListener('dblclick', elementCompleted);
+    function elementCompleted (event){
+        event.target.classList.toggle('completed'); // Resuloção Baseada no conteúdo do site https://www.w3schools.com/howto/howto_js_toggle_class.asp
+    }
+}
 
 window.onload = function () {
     taskSelected();
+    taskCompleted();
 };
