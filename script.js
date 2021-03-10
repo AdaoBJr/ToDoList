@@ -64,10 +64,10 @@ function taskCompleted (){
     }
 }
 
-// Remove todos os itens marcados como completados (riscados) da lista
+// Remove todos os itens da lista
 function clearAllTaskList (){
-    let clearBtn = document.querySelector('#apaga-tudo');
-    clearBtn.addEventListener('click', clearAll);
+    let clearAllBtn = document.querySelector('#apaga-tudo');
+    clearAllBtn.addEventListener('click', clearAll);
 
     function clearAll (){
         let listItems = document.querySelectorAll ('.task');
@@ -77,8 +77,28 @@ function clearAllTaskList (){
     }
 }
 
+// Remove todos os itens marcados como completados (riscados) da lista
+function clearAllCompleted () {
+    let clearCompletedBtn = document.querySelector('#remover-finalizados'); 
+    clearCompletedBtn.addEventListener('click', clearCompleted);
+
+    function clearCompleted (){
+        let listItems = document.querySelectorAll ('.completed');
+        if (listItems.length != 0){
+            for (let i = 0; i < listItems.length; i += 1){  
+            listItems[i].remove();
+            }
+        } else {
+            alert('Clique duas vezes sobre uma tarefa para marcá-la como finalizada antes de excluí-la'); 
+        }
+    }
+}
+
+
+
 window.onload = function () {
     taskSelected();
     taskCompleted();
     clearAllTaskList();
+    clearAllCompleted();
 };
