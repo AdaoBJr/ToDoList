@@ -1,7 +1,9 @@
 //Cria Novos Itens na Lista de Tarefas
 //Adiciona Evento Click no Botão com a Captura da informação do input
 let btnAddItem = document.querySelector('#criar-tarefa');
+let inptAddItem = document.querySelector('#texto-tarefa');
 btnAddItem.addEventListener('click', insertItemsList);
+inptAddItem.addEventListener('keyup', insertItemsListKeyUp);
 
 function insertItemsList (){
     let textInput = document.querySelector('#texto-tarefa');
@@ -13,7 +15,21 @@ function insertItemsList (){
         listItems.innerHTML = textInput.value;
         localOl.appendChild(listItems);
         textInput.value = '';
-    }   
+    }
+}
+
+    function insertItemsListKeyUp (event){ // Resolução baseada no conteúdo do site https://pt.stackoverflow.com/questions/180333/evento-tecla-enter-no-input
+        let textInput = document.querySelector('#texto-tarefa');
+        let localOl = document.querySelector('#lista-tarefas');
+        let key = event.which || event.keyCode;
+        
+        if (textInput.value != '' && key == 13) {
+            let listItems = document.createElement('li');
+            listItems.className = "task"
+            listItems.innerHTML = textInput.value;
+            localOl.appendChild(listItems);
+            textInput.value = '';
+        }   
 }
 
 //Adiciona o Background cinza no item clicado
