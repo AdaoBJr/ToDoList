@@ -9,6 +9,7 @@ function insertItemsList (){
     
     if (textInput.value != '') {
         let listItems = document.createElement('li');
+        listItems.className = "task"
         listItems.innerHTML = textInput.value;
         localOl.appendChild(listItems);
         textInput.value = '';
@@ -53,16 +54,31 @@ function taskSelected () {
     taskList.addEventListener('mouseover', mouseOver);
 }
 
-// Adiciona uma linha riscando o(s) item(s) já finalizado
+// Adiciona e Remove uma linha riscando o(s) item(s) já finalizado
 function taskCompleted (){
     let taskList = document.querySelector('#lista-tarefas');
     taskList.addEventListener('dblclick', elementCompleted);
+
     function elementCompleted (event){
         event.target.classList.toggle('completed'); // Resuloção Baseada no conteúdo do site https://www.w3schools.com/howto/howto_js_toggle_class.asp
+    }
+}
+
+// Remove todos os itens marcados como completados (riscados) da lista
+function clearAllTaskList (){
+    let clearBtn = document.querySelector('#apaga-tudo');
+    clearBtn.addEventListener('click', clearAll);
+
+    function clearAll (){
+        let listItems = document.querySelectorAll ('.task');
+        for (let i = 0; i < listItems.length; i += 1){
+            listItems[i].remove();
+        }
     }
 }
 
 window.onload = function () {
     taskSelected();
     taskCompleted();
+    clearAllTaskList();
 };
