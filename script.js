@@ -110,6 +110,15 @@ function clearAllCompleted () {
     }
 }
 
+// Remove tarefa marcada como selecionada
+function removeSelected(){
+    let clearSelectedBtn = document.querySelector('#remover-selecionado');
+    clearSelectedBtn.addEventListener('click', () => {
+        let itemsSelected = document.querySelector('.selected');
+            itemsSelected.remove();
+    });
+}
+
 // Cria a lista de tarefas salvas
 function savedList () {
     let btnSavedList = document.querySelector('#salvar-tarefas');
@@ -167,6 +176,7 @@ function moveDown (){
     });
 }
 
+
 window.onload = function () {
     taskSelected();
     taskCompleted();
@@ -177,4 +187,5 @@ window.onload = function () {
     clearStorage();
     moveUp();
     moveDown();
+    removeSelected();
 };
