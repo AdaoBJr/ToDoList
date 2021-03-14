@@ -136,7 +136,36 @@ function getSavedList (){
         taskList.appendChild(recoverList);
     }
 }
+// Apaga lista salva no localStorage
+function clearStorage (){
+    let clearStorageBtn = document.querySelector('#apagar-storage');
+    clearStorageBtn.addEventListener('click', () =>{
+        localStorage.clear();
+        alert('Tarefas Apagadas com Sucesso!')
+    });
+}
 
+// Cria funções de mover uma tarefa para cima ou para baixo
+function moveUp (){
+    let upBtn = document.querySelector('#mover-cima');
+    upBtn.addEventListener('click', () => {
+        let taskSelected = document.querySelector('.selected');
+        if (taskSelected){
+            let previousElem = taskSelected.previousElementSibling;
+            if (previousElem){previousElem.before(taskSelected);}
+        }   
+    });
+}
+function moveDown (){
+    let downBtn = document.querySelector('#mover-baixo');
+    downBtn.addEventListener('click',() => {
+        let taskSelected = document.querySelector('.selected');
+        if (taskSelected){
+            let nextElem = taskSelected.nextElementSibling;
+            if (nextElem){nextElem.after(taskSelected);}
+        }
+    });
+}
 
 window.onload = function () {
     taskSelected();
@@ -145,4 +174,7 @@ window.onload = function () {
     clearAllCompleted();
     savedList();
     getSavedList();
+    clearStorage();
+    moveUp();
+    moveDown();
 };
