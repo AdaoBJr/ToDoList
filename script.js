@@ -11,7 +11,7 @@ function insertItemsList (){
     
     if (textInput.value != '') {
         let listItems = document.createElement('li');
-        listItems.className = "task"
+        listItems.className = 'task';
         listItems.innerHTML = textInput.value;
         localOl.appendChild(listItems);
         textInput.value = '';
@@ -110,6 +110,32 @@ function clearAllCompleted () {
     }
 }
 
+// Cria a lista de tarefas salvas
+function savedList () {
+    let btnSavedList = document.querySelector('#salvar-tarefas');
+    btnSavedList.addEventListener('click', () => {
+        let listItems = document.querySelectorAll ('.task');
+        for (let i = 0; i < listItems.length; i += 1){
+            let saved = {
+                text: listItems[i].innerText,
+                class: listItems[i].className,
+            };
+            localStorage.setItem(i, JSON.stringify(saved));
+        }
+    });
+}
+// Recupera a lista de tarefas salva
+function getSavedList (){
+    let taskList = document.querySelector('#lista-tarefas');
+    for (let i = 0; i < localStorage.length; i += 1){
+        let recoverList = document.createElement('li');
+        let recoverObj = JSON.parse(localStorage.getItem(i));
+        recoverList.innerText = recoverObj.text;
+        recoverList.className = recoverObj.class;
+        recoverList.classList.remove('selected');
+        taskList.appendChild(recoverList);
+    }
+}
 
 
 window.onload = function () {
@@ -117,4 +143,6 @@ window.onload = function () {
     taskCompleted();
     clearAllTaskList();
     clearAllCompleted();
+    savedList();
+    getSavedList();
 };
